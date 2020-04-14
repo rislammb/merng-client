@@ -7,7 +7,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { setContext } from 'apollo-link-context';
 
 const httpLink = createHttpLink({
-  uri: 'https://floating-eyrie-46326.herokuapp.com',
+  uri: process.env.BACKEND_URL,
 });
 
 const authLink = setContext(() => {

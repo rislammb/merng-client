@@ -26,7 +26,9 @@ const PostCard = ({
         <Card.Meta as={Link} to={`/posts/${id}`}>
           {moment(createdAt).fromNow(true)}
         </Card.Meta>
-        <Card.Description>{body}</Card.Description>
+        <Card.Description>
+          {body.length > 200 ? body.slice(0, 180) + '.....' : body}
+        </Card.Description>
       </Card.Content>
       <Card.Content extra>
         <LikeButton user={user} post={{ id, likeCount, likes }} />
