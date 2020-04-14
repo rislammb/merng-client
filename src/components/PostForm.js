@@ -6,25 +6,26 @@ import { useMutation } from '@apollo/react-hooks';
 import { useForm } from '../util/hooks';
 import { FETCH_POSTS_QUERY } from '../util/graphql';
 
-function PostForm() {
+function PostForm({ addPost }) {
   const [error, setError] = useState('');
   const { values, onChange, onSubmit } = useForm(createPostCallback, {
-    body: ''
+    body: '',
   });
   const [createPost] = useMutation(CREATE_POST_MUTATION, {
     variables: values,
     update(proxy, result) {
       setError('');
       const data = proxy.readQuery({
-        query: FETCH_POSTS_QUERY
+        query: FETCH_POSTS_QUERY,
       });
       data.getPosts = [result.data.createPost, ...data.getPosts];
       proxy.writeQuery({ query: FETCH_POSTS_QUERY, data });
       values.body = '';
+      addPost(result.data.createPost);
     },
     onError(err) {
       setError(err.graphQLErrors[0].message);
-    }
+    },
   });
   function createPostCallback() {
     createPost();

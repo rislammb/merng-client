@@ -8,7 +8,7 @@ import {
   Button,
   Icon,
   Label,
-  Form
+  Form,
 } from 'semantic-ui-react';
 import moment from 'moment';
 
@@ -26,8 +26,8 @@ function SinglePost(props) {
 
   const { data, loading } = useQuery(FETCH_POST_QUERY, {
     variables: {
-      postId
-    }
+      postId,
+    },
   });
 
   const [submitComment] = useMutation(SUBMIT_COMMENT_MUTATION, {
@@ -37,8 +37,8 @@ function SinglePost(props) {
     },
     variables: {
       postId,
-      body: comment
-    }
+      body: comment,
+    },
   });
 
   function deletePostCallback() {
@@ -57,7 +57,7 @@ function SinglePost(props) {
       likeCount,
       likes,
       commentCount,
-      comments
+      comments,
     } = data.getPost;
 
     postMarkup = (
@@ -95,7 +95,11 @@ function SinglePost(props) {
                   </Button>
                 </MyPopup>
                 {user && user.username === username && (
-                  <DeleteButton postId={id} callback={deletePostCallback} />
+                  <DeleteButton
+                    postId={id}
+                    deletePost={props.deletePost}
+                    callback={deletePostCallback}
+                  />
                 )}
               </Card.Content>
             </Card>
@@ -110,7 +114,7 @@ function SinglePost(props) {
                         placeholder='Comment...'
                         name='comment'
                         value={comment}
-                        onChange={e => setComment(e.target.value)}
+                        onChange={(e) => setComment(e.target.value)}
                         ref={commentInputRef}
                       />
                       <button
@@ -126,7 +130,7 @@ function SinglePost(props) {
                 </Card.Content>
               </Card>
             )}
-            {comments.map(comment => (
+            {comments.map((comment) => (
               <Card fluid key={comment.id}>
                 <Card.Content>
                   {user && user.username === comment.username && (
