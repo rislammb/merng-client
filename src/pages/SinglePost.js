@@ -62,15 +62,15 @@ function SinglePost(props) {
 
     postMarkup = (
       <Grid>
-        <Grid.Row>
-          <Grid.Column width={2}>
+        <Grid.Row style={{ justifyContent: 'center' }}>
+          <Grid.Column mobile='4' computer='3'>
             <Image
               float='right'
               size='small'
               src='https://semantic-ui.com/images/avatar2/large/elyse.png'
             />
           </Grid.Column>
-          <Grid.Column width={10}>
+          <Grid.Column mobile='12' computer='10'>
             <Card fluid>
               <Card.Content>
                 <Card.Header>{username}</Card.Header>
