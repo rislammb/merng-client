@@ -9,6 +9,7 @@ import { setContext } from 'apollo-link-context';
 const httpLink = createHttpLink({
   uri: process.env.BACKEND_URL,
 });
+if (process.env) console.log(process.env);
 
 const authLink = setContext(() => {
   const token = localStorage.getItem('jwtToken');
