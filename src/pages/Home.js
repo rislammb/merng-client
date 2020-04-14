@@ -28,7 +28,7 @@ const Home = () => {
       </Grid.Row>
       <Grid.Row>
         {user && (
-          <Grid.Column mobile='16' computer='8'>
+          <Grid.Column mobile='16' computer='8' style={{ marginBottom: 10 }}>
             <PostForm addPost={addPost} />
           </Grid.Column>
         )}
